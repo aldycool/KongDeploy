@@ -5,9 +5,11 @@ With a little difference:
 - Setting Kong Admin API loop back is described here in readme
 - Simplified and other little cleanups
 
-1. Recommended to change KONGA_ENV in .env to new Guid value
-2. To start installation, run: sudo ./start.sh
-3. Setup the Kong Admin API Loopback:
+1. git clone https://github.com/aldycool/KongDeploy.git
+2. Change to the directory: cd KongDeploy
+3. Recommended to change KONGA_ENV in .env to new Guid value
+4. To start installation, run: sudo ./start.sh
+5. Setup the Kong Admin API Loopback:
 
 # Add Kong Admin API as Service:
 curl --location --request POST 'http://localhost:8001/services/' \
