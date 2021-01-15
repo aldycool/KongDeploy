@@ -54,9 +54,12 @@ services:
     ports:
     - $KONG_PROXY_PORT:8000
     - $KONG_PROXY_SSL_PORT:8443
-    expose:
-    - $KONG_PROXY_ADMIN_API_PORT
-    - $KONG_PROXY_ADMIN_SSL_API_PORT
+    - mode: host
+      target: $KONG_PROXY_ADMIN_API_PORT
+      published: $KONG_PROXY_ADMIN_API_PORT
+    - mode: host
+      target: KONG_PROXY_ADMIN_SSL_API_PORT
+      published: KONG_PROXY_ADMIN_SSL_API_PORT
     networks:
     - kong-network
 
