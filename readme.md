@@ -12,7 +12,7 @@ With a little difference:
 1. `git clone https://github.com/aldycool/KongDeploy.git`
 2. Change to the directory: `cd KongDeploy`
 3. Recommended to change KONGA_ENV in .env to new Guid value
-4. To start installation: `sudo ./start.sh`
+4. To start installation: `sudo ./deploy.sh`
 5. Setup the Kong Admin API Loopback:
 
 ```
@@ -63,3 +63,12 @@ sudo docker-compose down
 # Change KONGA_ENV=production, save the file.
 sudo docker-compose up -d db kong konga
 ```
+
+# Deployment Notes
+- The `deploy.sh` is only executed once, and and all instruction above are expected to be executed completely.
+- To shut down the containers, run `sudo docker-compose down`
+- During the shut down, if needed, all the objects created (docker network, persistent volume) can be deleted to reset back to original state, run `sudo docker system prune --volumes`
+- To activate the containers again, run `sudo docker-compose up -d db, kong, konga`. The containers are explicitly stated here, because these are the only active containers needed (the `kong-migrations` is just only run once)
+- If you plan to deploy this in **Docker Swarm** please be aware that the current port exposures in the `kong` container **will expose the Kong Admin API Ports in Docker Swarm!!** even though it is already binded to loopback API (127.0.0.1:8001). To mitigate this, read about binding using mode: host in here: https://stackoverflow.com/questions/50621936/docker-service-exposed-publicly-though-made-to-expose-ports-to-localhost-only
+
+  
